@@ -1,16 +1,9 @@
 import Fastify, { FastifyInstance } from 'fastify'
-import { ServerResponse } from 'http'
+import { getUsers } from './controllers/UserController'
 
 const server: FastifyInstance = Fastify({})
 
-server.get('/users', async (request, reply): Promise<ServerResponse> => {
-  const users = await fetch(process.env.API_URL)
-  
-  return reply
-    .code(200)
-    .header('Content-Type', 'application/json; charset=utf-8')
-    .send(await users.json())
-})
+server.get('/users', getUsers)
 
 const start = async () => {
   try {
