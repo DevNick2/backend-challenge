@@ -1,22 +1,31 @@
+import { handleCheckAPayer } from '../../controllers/UserController';
+
+import { newUser } from '../UserFactory';
+
 describe('Validar se o método que valida se o usuario é um pagante esta ok', () => {
-  // importar o método
-  // importar o método para criar usuarios
-  // cria um user e passa um user como argumento do método
+  test('Passa um usuario com status disabled e role = editor ou admin', () => {
+    const userDisabledWithRoleEditor = newUser({ role: 'editor', status: 'disabled' })
+    expect(handleCheckAPayer(userDisabledWithRoleEditor)).toBe(false)
 
-  // cenário: status é disabled e a role é editor ou admin: is_a_payer = false
-  // cenário: status é enabled e a role é editor ou admin: is_a_payer = true
-  // cenário: status é enabled e a role é diferente de editor ou admin: is_a_payer = false
-  // cenário: status é disabled e a role é diferente de editor ou admin: is_a_payer = false
+    const userDisabledWithRoleAdmin = newUser({ role: 'admin', status: 'disabled' })
+    expect(handleCheckAPayer(userDisabledWithRoleAdmin)).toBe(false)
+  })
 
-  const userDisabledWithRoleEditorOrAdmin = {}
-  expect(handleCheckAPayer(userDisabledWithRoleEditorOrAdmin)).toBe(false)
+  test('Passa um user com status enabled e a role = editor ou admin', () => {
+    const userEnabledWithRoleEditor = newUser({ role: 'editor', status: 'enabled' })
+    expect(handleCheckAPayer(userEnabledWithRoleEditor)).toBe(true)
 
-  const userEnabledWithRoleEditorOrAdmin = {}
-  expect(handleCheckAPayer(userEnabledWithRoleEditorOrAdmin)).toBe(true)
+    const userEnabledWithRoleAdmin = newUser({ role: 'admin', status: 'enabled' })
+    expect(handleCheckAPayer(userEnabledWithRoleAdmin)).toBe(true)
+  })
 
-  const userEnabledWithRoleDiferent = {}
-  expect(handleCheckAPayer(userEnabledWithRoleDiferent)).toBe(false)
+  test('Passa o status enabled e a role != editor ou admin', () => {
+    const userEnabledWithRoleDiferent = newUser({ role: 'viewer', status: 'enabled' })
+    expect(handleCheckAPayer(userEnabledWithRoleDiferent)).toBe(false)
+  })
 
-  const userDisabledWithRoleDiferent = {}
-  expect(handleCheckAPayer(userDisabledWithRoleDiferent)).toBe(false)
+  test('Passa o status disabled e a role != editor ou admin', () => {
+    const userDisabledWithRoleDiferent = newUser({ role: 'system', status: 'disabled' })
+    expect(handleCheckAPayer(userDisabledWithRoleDiferent)).toBe(false)
+  })
 })

@@ -9,7 +9,15 @@ import utc from 'dayjs/plugin/utc'
 dayjs.extend(utc);
 
 export function handleCheckAPayer (user: UserInterface): boolean {
-  return true
+  if (user.status === 'enabled') {
+    if (['editor', 'admin'].includes(user.role)) {
+      return true
+    }
+
+    return false
+  }
+
+  return false
 }
 
 // XXX TODO :: esta função pode ser reaproveitada
