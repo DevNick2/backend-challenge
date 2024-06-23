@@ -3,10 +3,7 @@
 
 name: Node.js CI
 
-on:
-  pull_request:
-    branches: [ $default-branch ]
-
+on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
