@@ -31,9 +31,13 @@ export function handleHideEmail (email: string): string {
   if (email.indexOf('niuco.com.br') === -1) {
     const atPosition = email.indexOf('@')
     const startEmail = email.slice(0, atPosition)
-    const newEmail = `${startEmail.slice(0, 2)}${startEmail.slice(2, startEmail.length-1).replaceAll(/\w/g, '*')}${startEmail.slice(startEmail.length-1, startEmail.length)}`
 
-    email = newEmail
+    email = [
+      startEmail.slice(0, 2),
+      startEmail.slice(2, startEmail.length-1).replaceAll(/\w/g, '*'),
+      startEmail.slice(startEmail.length-1, startEmail.length),
+      email.slice(atPosition, email.length)
+    ].toString().replaceAll(',', '')
   }
 
   return email
@@ -43,6 +47,7 @@ export function handleStatus (status: string): boolean {
 }
 export function handlePrepareUsers (user: UserInterface): UserResource {
   return {
+    id: user.id,
     name: user.name,
     role: user.role,
     is_active: handleStatus(user.status),

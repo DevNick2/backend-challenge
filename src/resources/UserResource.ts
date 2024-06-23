@@ -1,4 +1,5 @@
 export interface UserResource {
+  id: string,
   name: string,
   email: string,
   role: 'viewer' | 'system' | 'editor' | 'admin',
