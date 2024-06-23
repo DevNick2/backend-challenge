@@ -63,7 +63,7 @@ describe('Suite de testes para verificar o retorno do handlePrapreUser, deve est
     const user = newUser({ status: "enabled", role: "editor" })
     const preparedUser = handlePrepareUsers(user)
 
-    expect(preparedUser.is_active).toBeFalsy()
+    expect(preparedUser.is_active).toBeTruthy()
     expect(preparedUser.is_a_payer).toBeTruthy()
   })
 })
