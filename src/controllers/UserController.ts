@@ -1,15 +1,20 @@
+/* 
+  Aqui podemos implementar uma controller mais definida usando
+  Conceitos do MVC, aqui podemos implementar um CRUD e usar
+  Os services para chamar as funções necessárias para cada etapa
+*/
 import { UserInterface } from "../resources/UserInterface"
 import { UserResource } from "../resources/UserResource"
 
 import Logger from '../winston'
 
 import { FastifyRequest, FastifyReply } from 'fastify'
-import { ServerResponse } from 'http'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 
 dayjs.extend(utc);
 
+// XXX TODO :: esta função pode ser reaproveitada, podemos usar em um service
 export function handleCheckAPayer (user: UserInterface): boolean {
   if (user.status === 'enabled') {
     if (['editor', 'admin'].includes(user.role)) {
@@ -22,13 +27,11 @@ export function handleCheckAPayer (user: UserInterface): boolean {
   return false
 }
 
-// XXX TODO :: esta função pode ser reaproveitada
-// Migrar para algum helper
+// XXX TODO :: esta função pode ser reaproveitada, podemos usar em um service
 export function handleConvertUnixToIso (unix: number): string {
   return dayjs(unix).utc(true).toISOString()
 }
-// XXX TODO :: esta função pode ser reaproveitada
-// Migrar para algum helper
+// XXX TODO :: esta função pode ser reaproveitada, podemos usar em um service
 export function handleHideEmail (email: string): string {
   if (email.indexOf('niuco.com.br') === -1) {
     const atPosition = email.indexOf('@')
@@ -44,9 +47,11 @@ export function handleHideEmail (email: string): string {
 
   return email
 }
+// XXX TODO :: esta função pode ser reaproveitada, podemos usar em um service
 export function handleStatus (status: string): boolean {
   return status === 'enabled' || false
 }
+// XXX TODO :: esta função pode ser reaproveitada, podemos usar em um service
 export function handlePrepareUsers (user: UserInterface): UserResource {
   return {
     id: user.id,
