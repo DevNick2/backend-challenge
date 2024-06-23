@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 interface UserTest {
   name?: string,
   email?: string,
-  status?: string,
+  status?: 'enabled' | 'disabled',
   role?: 'viewer' | 'admin' | 'system' | 'editor'
 }
 

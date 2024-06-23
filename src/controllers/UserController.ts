@@ -28,7 +28,6 @@ export function handleConvertUnixToIso (unix: number): string {
 // XXX TODO :: esta função pode ser reaproveitada
 // Migrar para algum helper
 export function handleHideEmail (email: string): string {
-  // Adicionar o processo de esconder o e-mail
   if (email.indexOf('niuco.com.br') === -1) {
     const atPosition = email.indexOf('@')
     const startEmail = email.slice(0, atPosition)
@@ -40,7 +39,7 @@ export function handleHideEmail (email: string): string {
   return email
 }
 export function handleStatus (status: string): boolean {
-  return true
+  return status === 'enabled' || false
 }
 export function handlePrepareUsers (user: UserInterface): UserResource {
   return {
