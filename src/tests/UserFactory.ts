@@ -1,13 +1,22 @@
 import { UserInterface } from "../resources/UserInterface";
 
+import { faker } from '@faker-js/faker'
+
 import dayjs from "dayjs";
 
-export function newUser (): UserInterface {
+interface UserTest {
+  name?: string,
+  email?: string,
+  status?: string,
+  role?: 'viewer' | 'admin' | 'system' | 'editor'
+}
+
+export function newUser (manualData?: UserTest): UserInterface {
   return {
-    name: 'Teste',
-    email: 'Teste',
-    status: 'disabled',
-    role: 'viewer',
+    name: manualData?.name || faker.person.fullName(),
+    email: manualData?.email || faker.internet.email(),
+    status: manualData?.status || 'disabled',
+    role: manualData?.role || 'viewer',
     last_activity: dayjs().unix(),
   }
 }
