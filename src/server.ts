@@ -1,9 +1,6 @@
-import Fastify, { FastifyInstance } from 'fastify'
-import { getUsers } from './controllers/UserController'
+import { build } from "./app"
 
-const server: FastifyInstance = Fastify({})
-
-server.get('/users', getUsers)
+const server = build()
 
 const start = async () => {
   try {

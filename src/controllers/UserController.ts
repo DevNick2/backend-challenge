@@ -57,7 +57,7 @@ export function handlePrepareUsers (user: UserInterface): UserResource {
   }
 }
 
-export async function getUsers (req: FastifyRequest, res: FastifyReply): Promise<ServerResponse> {
+export async function handler (req: FastifyRequest, res: FastifyReply): Promise<ServerResponse> {
   const result = await fetch(process.env.API_URL)
   const users: object[] = []
 
