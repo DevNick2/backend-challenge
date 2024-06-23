@@ -10,25 +10,25 @@
 // const server = build()
 
 // describe('Testando a rota e o retorno do json', () => {
-//   // beforeAll(async () => {  
-//   //   try {
-//   //     await server.listen({ port: process.env.PORT })
-//   //   } catch (e) {
-//   //     console.log(e)
-//   //   }
-//   // })
+//   beforeAll(async () => {  
+//     try {
+//       await server.listen({ port: process.env.PORT })
+//     } catch (e) {
+//       console.log(e)
+//     }
+//   })
 
 //   test('Testando a rota e o retorno do json', async () => {
 //     const response = await server.inject().get('/users')
-//     // res.send(response.json())
+//     res.send(response.json())
 
-//     // const response = await fetch('http://localhost:4000/users')
+//     const response = await fetch('http://localhost:4000/users')
 
-//     // const users = await response.json()
-    
-//     // expect(response.status).toBe(200)
+//     const users = await response.json()
+  
+//     expect(response.status).toBe(200)
 
-//     // console.log(users)
+//     console.log(users)
 
 //     server.close()
 //   })

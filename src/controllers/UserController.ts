@@ -1,6 +1,8 @@
 import { UserInterface } from "../resources/UserInterface"
 import { UserResource } from "../resources/UserResource"
 
+import Logger from '../winston'
+
 import { FastifyRequest, FastifyReply } from 'fastify'
 import { ServerResponse } from 'http'
 import dayjs from 'dayjs'
@@ -57,18 +59,22 @@ export function handlePrepareUsers (user: UserInterface): UserResource {
   }
 }
 
-export async function handler (req: FastifyRequest, res: FastifyReply): Promise<ServerResponse> {
-  const result = await fetch(process.env.API_URL)
-  const users: object[] = []
-
-  await result.json()
-    // XXX FIXME :: Verificar por que não esta inferindo a interface correta
-    .then((resolve: any) => {
-      resolve.map((user: UserInterface) => users.push(handlePrepareUsers(user)))
-    })
-
-  return res
-    .code(200)
-    .header('Content-Type', 'application/json; charset=utf-8')
-    .send(users)
+export async function handler (req: FastifyRequest, res: FastifyReply) {
+  try {
+    const result = await fetch(process.env.API_URL)
+    const users: object[] = []
+  
+    await result.json()
+      // XXX FIXME :: Verificar por que não esta inferindo a interface correta
+      .then((resolve: any) => {
+        resolve.map((user: UserInterface) => users.push(handlePrepareUsers(user)))
+      })
+  
+    return res
+      .code(200)
+      .header('Content-Type', 'application/json; charset=utf-8')
+      .send(users)
+  } catch (err) {
+    Logger.error(err)
+  }
 }
