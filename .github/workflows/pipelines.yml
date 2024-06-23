@@ -4,6 +4,7 @@
 name: Backend challenge CI
 
 on: workflow_dispatch
+# Vou manter a opção de acionar o workflow manualmente para PRD
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,3 +21,4 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm run test:ci
+    # Aqui da pra adicionar um gatilho para publicar de forma automágica na AWS
