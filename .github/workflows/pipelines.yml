@@ -7,10 +7,10 @@ on: workflow_dispatch
 # Vou manter a opção de acionar o workflow manualmente para PRD
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # roda sobe uma instância linux
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [18.x, 20.x] # roda a estratégia do pipe em 2 versoes do node
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
